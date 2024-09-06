@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="col-md-9 col-md-offset-3">
+  <div class="projects">
+    <article class="post">
+      <div class="post-media">
+        <a href="single.html">
+          <img src="{% static 'images/about.jpg' %}" alt="About" />
+        </a>
+      </div>
+      <div class="post-content">
+        <h2 class="title">About Me</h2>
+
+        <!-- The Content -->
+        <div class="the-content">
+          <p>
+            There’s nothing quite as frightening as the unknown. These words of
+            former US Secretary of Defense Donald Rumsfeld should be truly
+            terrifying (although the general consensus at the time was that they
+            sounded like nonsense).
+          </p>
+          <p>
+            Etiam egestas velit dolor, a pretium elit finibus a. Donec tempus
+            purus vel consequat pulvinar. Pellentesque at eros nec felis
+            consectetur consequat in et turpis. Donec at erat venenatis,
+            imperdiet sapien quis, molestie nisi. Phasellus metus nisi, placerat
+            quis scelerisque sit amet, dapibus eget massa. Nunc egestas congue
+            metus. Fusce facilisis purus quis diam fermentum, vitae bibendum
+            metus porttitor.
+          </p>
+          <p>
+            Suspendisse eleifend nulla ac rhoncus egestas. Sed vehicula ipsum
+            vitae finibus condimentum. Phasellus rhoncus, nulla et sodales
+            sodales, massa nisl volutpat odio, ac sodales risus metus
+            sollicitudin odio.
+          </p>
+          <blockquote>
+            <p>
+              Donec eget ipsum sagittis, varius leo non, mattis eros. Donec
+              eleifend, urna ut elementum tincidunt, velit nibh pulvinar odio,
+              ac tristique mauris magna sit amet arcu. Aenean vestibulum gravida
+              rutrum. Morbi vel augue a lectus ultricies varius nec id elit.
+            </p>
+            <footer>Kelly Ripa</footer>
+          </blockquote>
+          <div class="post-footer">
+            <div class="post-share-wrap">
+              <div class="post-share">
+                <a href="#">
+                  <i class="fa fa-facebook"></i>
+                </a>
+                <a href="#">
+                  <i class="fa fa-twitter"></i>
+                </a>
+                <a href="#">
+                  <i class="fa fa-google-plus"></i>
+                </a>
+                <a href="#">
+                  <i class="fa fa-linkedin"></i>
+                </a>
+                <a href="#">
+                  <i class="fa fa-pinterest"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End The Content -->
+      </div>
+    </article>
+  </div>
+</div>
+{% endblock %}

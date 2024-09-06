@@ -20,12 +20,47 @@
 
 <body class="home"> 
 	<div id="main-content">
-
-	{% include 'header.html' %}
-{% block content %}											
-{% endblock %}
-    {% include 'footer.html' %}
+		<!-- Preload -->
+	<div id="preload">
+		<div class="kd-bounce">
+			<div></div>
+			<div></div>
+		</div>
 	</div>
+	<!-- Preload -->
+
+	<!-- Mobile Menu -->
+	<div class="mobile">
+		<div class="container">
+			<!-- Mobile -->
+			<div class="menu-mobile">
+				<span class="item item-1"></span>
+				<span class="item item-2"></span>
+				<span class="item item-3"></span>
+			</div>
+			<!-- End Mobile -->
+
+			<!-- Logo -->
+			<div class="logo">
+				<a href="index.html">Kelly</a>
+			</div>
+			<!-- End Logo -->
+		</div>
+	</div>
+	<div class="hide-menu"></div>
+	<!-- End Mobile Menu -->
+
+	<div class="container">
+		<div class="row">
+			{% include 'header.html' %}
+			{% block content %}											
+			{% endblock %}
+		</div>
+	</div>
+</div>
+<!-- End Wrapper Site -->
+
+    {% include 'footer.html' %}
 	<!-- Scripts -->
 	<script src="{% static '/js/libs/jquery-1.12.4.min.js' %}"></script>
 	<script src="{% static '/js/libs/jquery.justifiedGallery.min.js' %}"></script>
