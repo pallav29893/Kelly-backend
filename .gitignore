@@ -1,0 +1,36 @@
+# Python bytecode files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Environment variables
+.env
+
+# Django specific
+*.log
+*.pot
+*.pyc
+__pycache__/
+db.sqlite3
+media/
+staticfiles/
+migrations/
+
+# Virtual environment
+envkelly/
+venv/
+env/
+ENV/
+venv.bak/
+env.bak/
+
+# IDE/editor specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Windows specific files
+Thumbs.db
+Desktop.ini
