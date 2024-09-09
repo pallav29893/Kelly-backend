@@ -5,122 +5,123 @@
 {% block content %}
 	<div class="col-md-9 col-md-offset-3">
 		<div class="projects">
-
+        {% for post in posts %}
 			<article class="post">
 				<div class="post-media">
-					<a href="single.html">
-						<img src="{% static 'images/posts/1.jpg' %}" alt="Post">
+					<a href="{% url 'blog_details' slug=post.slug %}">
+						<img style="width: 700px;" src="{% if post.feature_image %}{{post.feature_image.url}} {% else %} {% endif %}" alt="Post">
 					</a>
 				</div>
 				<div class="post-content">
 					<h2 class="title">
-						<a href="single.html">Make a difference today</a>
+						<a href="{% url 'blog_details' slug=post.slug %}">{{ post.title }}</a>
 					</h2>
 
 					<!-- Post Details -->
 					<div class="post-details">
-						<a href="#" class="post-date">October 9, 2017</a>
-						<a href="#" class="post-views">15 views</a>
-						<a href="#" class="post-comments">03 Comments</a>
+						<a href="{% url 'blog_details' slug=post.slug %}" class="post-date">{{ post.published_date }}</a>
+						<!-- <a href="#" class="post-views">15 views</a> -->
+						<a href="{% url 'blog_details' slug=post.slug %}" class="post-comments">{{ post.comments.count }} comments</a>
 					</div>
 					<!-- End Post Details -->
 
 					<!-- The Content -->
 					<div class="the-excerpt">
-						<p>Morbi leo enim, laoreet eget urna id, ullamcorper condimentum urna. Curabitur accumsan sem et nisi ultricies porttitor. Aliquam sed nunc elit. Nunc faucibus interdum mauris at mattis. Phasellus congue volutpat porttitor.
-							Vivamus fringilla iaculis ex, et condimentum magna pharetra id. Aliquam erat volutpat. Nam odio velit, egestas vel leo tempus, luctus dapibus mauris.
+						<p>{{ post.description|truncatewords:'50' }}
 						</p>
 					</div>
 					<!-- End The Content -->
-				</div>
-			</article>
+				 </div>
+			</article> 
+			{% endfor %}
 
-			<article class="post">
+			<!--<article class="post">
 				<div class="post-media">
-					<a href="single.html">
+					<a href="#">
 						<img src="{% static 'images/posts/2.jpg' %}" alt="Post">
 					</a>
 				</div>
 				<div class="post-content">
 					<h2 class="title">
-						<a href="single.html">Make a difference today</a>
-					</h2>
+						<a href="#">Make a difference today</a>
+					</h2> -->
 
 					<!-- Post Details -->
-					<div class="post-details">
+					<!-- <div class="post-details">
 						<a href="#" class="post-date">October 9, 2017</a>
 						<a href="#" class="post-views">15 views</a>
 						<a href="#" class="post-comments">03 Comments</a>
-					</div>
+					</div> -->
 					<!-- End Post Details -->
 
 					<!-- The Content -->
-					<div class="the-excerpt">
+					<!-- <div class="the-excerpt">
 						<p>Morbi leo enim, laoreet eget urna id, ullamcorper condimentum urna. Curabitur accumsan sem et nisi ultricies porttitor. Aliquam sed nunc elit. Nunc faucibus interdum mauris at mattis. Phasellus congue volutpat porttitor.
 							Vivamus fringilla iaculis ex, et condimentum magna pharetra id. Aliquam erat volutpat. Nam odio velit, egestas vel leo tempus, luctus dapibus mauris.
 						</p>
-					</div>
+					</div> -->
 					<!-- End The Content -->
-				</div>
+				<!-- </div>
 			</article>
 
 			<article class="post">
 				<div class="post-media">
-					<a href="single.html">
+					<a href="#">
 						<img src="{% static 'images/posts/3.jpg' %}" alt="Post">
 					</a>
 				</div>
 				<div class="post-content">
 					<h2 class="title">
-						<a href="single.html">Make a difference today</a>
-					</h2>
+						<a href="#">Make a difference today</a>
+					</h2> -->
 
 					<!-- Post Details -->
-					<div class="post-details">
+					<!-- <div class="post-details">
 						<a href="#" class="post-date">October 9, 2017</a>
 						<a href="#" class="post-views">15 views</a>
 						<a href="#" class="post-comments">03 Comments</a>
-					</div>
+					</div> -->
 					<!-- End Post Details -->
 
 					<!-- The Content -->
-					<div class="the-excerpt">
+					<!-- <div class="the-excerpt">
 						<p>Morbi leo enim, laoreet eget urna id, ullamcorper condimentum urna. Curabitur accumsan sem et nisi ultricies porttitor. Aliquam sed nunc elit. Nunc faucibus interdum mauris at mattis. Phasellus congue volutpat porttitor.
 							Vivamus fringilla iaculis ex, et condimentum magna pharetra id. Aliquam erat volutpat. Nam odio velit, egestas vel leo tempus, luctus dapibus mauris.
 						</p>
-					</div>
+					</div> -->
 					<!-- End The Content -->
-				</div>
+				<!-- </div>
 			</article>
 
 			<article class="post">
 				<div class="post-media">
-					<a href="single.html">
+					<a href="#">
 						<img src="{% static 'images/posts/4.jpg' %}" alt="Post">
 					</a>
 				</div>
 				<div class="post-content">
 					<h2 class="title">
-						<a href="single.html">Make a difference today</a>
-					</h2>
+						<a href="#">Make a difference today</a>
+					</h2> -->
 
 					<!-- Post Details -->
-					<div class="post-details">
+					<!-- <div class="post-details">
 						<a href="#" class="post-date">October 9, 2017</a>
 						<a href="#" class="post-views">15 views</a>
 						<a href="#" class="post-comments">03 Comments</a>
-					</div>
+					</div> -->
 					<!-- End Post Details -->
 
 					<!-- The Content -->
-					<div class="the-excerpt">
+					<!-- <div class="the-excerpt">
 						<p>Morbi leo enim, laoreet eget urna id, ullamcorper condimentum urna. Curabitur accumsan sem et nisi ultricies porttitor. Aliquam sed nunc elit. Nunc faucibus interdum mauris at mattis. Phasellus congue volutpat porttitor.
 							Vivamus fringilla iaculis ex, et condimentum magna pharetra id. Aliquam erat volutpat. Nam odio velit, egestas vel leo tempus, luctus dapibus mauris.
 						</p>
-					</div>
+					</div> -->
 					<!-- End The Content -->
-				</div>
-			</article>			
+				<!-- </div>
+			</article>			 -->
+		    </div>
 		</div>
 	</div>
 {% endblock %}

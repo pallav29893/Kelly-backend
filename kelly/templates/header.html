@@ -1,22 +1,20 @@
+<div class="col-md-3">
+  <div class="header affix">
+    <div class="table">
+      <div class="table-cell">
+        <!-- Logo -->
+        <div class="logo">
+          <a href="index.html">Kelly</a>
+        </div>
+        <!-- End Logo -->
 
-
-			<div class="col-md-3">
-				<div class="header affix">
-					<div class="table">
-						<div class="table-cell">
-							<!-- Logo -->
-							<div class="logo">
-								<a href="index.html">Kelly</a>
-							</div>
-							<!-- End Logo -->
-
-							<!-- Navigation -->
-							<div class="main-menu">
-								<nav>
-									<ul class="menu-list">
-										<li class="active menu-item-has-children">
-											<a href="{% url 'home' %}">Home</a>
-											<!-- <ul class="sub-menu">
+        <!-- Navigation -->
+        <div class="main-menu">
+          <nav>
+            <ul class="menu-list">
+              <li class="active menu-item-has-children">
+                <a href="{% url 'home' %}">Home</a>
+                <!-- <ul class="sub-menu">
 												<li>
 													<a href="index.html">List Layout</a>
 												</li>
@@ -43,77 +41,86 @@
 										<li>
 											<a href="#">Furniture</a>
 										</li> -->
-										<li class="menu-item-has-children">
-											<a href="{% url 'blog' %}">Blog</a>
-											<ul>
-												<!-- <li>
+              </li>
+
+              <li class="menu-item-has-children">
+                <a href="{% url 'blog' %}">Blog</a>
+                <ul>
+                  <!-- <li>
 													<a href="about.html">About Me</a>
 												</li> -->
-												<!-- <li>
-													<a href="single.html">Single</a>
-												</li>
-												<li>
+                  <!-- <li>
+												</li> -->
+												<!-- <li> 
 													<a href="single-project.html">Project</a>
 												</li>
 												<li>
 													<a href="404.html">404 Page</a>
 												</li> -->
-											</ul>
-										</li>
-                                        <li>
-											<a href="{% url 'about-us' %}">About Us</a>
-										</li>
-										<li>
-											<a href="{% url 'contact-us' %}">Contact Us</a>
-										</li>
-									</ul>
-								</nav>
-							</div>
-							<!-- End Navigation -->
+                </ul>
+              </li>
+              <li>
+                <a href="{% url 'about-us' %}">About Us</a>
+              </li>
+              <li>
+                <a href="{% url 'contact-us' %}">Contact Us</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <!-- End Navigation -->
 
-                            <!-- Socials -->
-                            <div class="socials">
-                                <a href="#" title="Behance">
-                                    <i class="fa fa-behance"></i>
-                                </a>
-                                <a href="#" title="Dribbble">
-                                    <i class="fa fa-dribbble"></i>
-                                </a>
-                                <a href="#" title="Facebook">
-                                    <i class="fa fa-facebook"></i>
-                                </a>
-                                <a href="#" title="Google Plus">
-                                    <i class="fa fa-google-plus"></i>
-                                </a>
-                                <a href="#" title="Instagram">
-                                    <i class="fa fa-instagram"></i>
-                                </a>
-                                <a href="#" title="Search this site">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                            </div>
-                            <div class="box-search">
-                                <div class="table">
-                                    <div class="table-cell">
-                                        <div class="container">
-                                            <form class="search-form" action="#" method="get">
-                                                <input type="search" name="s" class="search-field" placeholder="Type &amp; hit enter" value="" title="Search">
-                                                <div class="kd-close">
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Socials -->
-
-                            <div class="copyright">
-                                <p>
-                                    Kelly @ 2018. Design by Kelly
-                                </p>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
+        <!-- Socials -->
+        <div class="socials">
+          <a href="#" title="Behance">
+            <i class="fa fa-behance"></i>
+          </a>
+          <a href="#" title="Dribbble">
+            <i class="fa fa-dribbble"></i>
+          </a>
+          <a href="#" title="Facebook">
+            <i class="fa fa-facebook"></i>
+          </a>
+          <a href="#" title="Google Plus">
+            <i class="fa fa-google-plus"></i>
+          </a>
+          <a href="#" title="Instagram">
+            <i class="fa fa-instagram"></i>
+          </a>
+          <a href="#" title="Search this site">
+            <i class="fa fa-search"></i>
+          </a>
+        </div>
+        <div class="box-search">
+          <div class="table">
+            <div class="table-cell">
+              <div class="container">
+                <form class="search-form" action="#" method="get">
+                  <input
+                    type="search"
+                    name="s"
+                    class="search-field"
+                    placeholder="Type &amp; hit enter"
+                    value=""
+                    title="Search"
+                  />
+                  <div class="kd-close"></div>
+                </form>
+              </div>
             </div>
+          </div>
+        </div>
+        <!-- End Socials -->
+
+        <div class="copyright">
+          <p id="copyright-text"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  const currentYear = new Date().getFullYear();
+  
+  document.getElementById('copyright-text').textContent = `Pallav @ ${currentYear}. Design by Pallav Choudhary`;
+</script>
