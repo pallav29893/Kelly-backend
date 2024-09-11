@@ -54,13 +54,57 @@
             {% endfor %}
           </div>
         </div>
+        &nbsp
+        &nbsp
         <!-- End The Content -->
-        {% for comment in comment %}
+
+         <!-- comment form -->
+        <div id="respond" class="comment">
+          <h2 class="title">Leave a comment</h2>
+          <form method="post" class="comment-form contact">
+            {% csrf_token %}
+            <div class="contact-item form-name">
+              <input
+                name="name"
+                value=""
+                type="text"
+                placeholder="Your Name *"
+              />
+            </div>
+            <div class="contact-item form-email">
+              <input
+                name="email"
+                value=""
+                type="text"
+                placeholder="Your Email *"
+              />
+            </div>
+            <div class="contact-item field-full form-message">
+              <textarea
+                name="text"
+                placeholder="Your Comment ..."
+                value=""
+              ></textarea>
+            </div>
+            <div class="contact-item form-submit">
+              <input
+                name="submit"
+                type="submit"
+                id="submit"
+                class="submit"
+                value="POST Comment"
+              />
+            </div>
+          </form>
+        </div> 
+
+        
         <div id="comments">
           <h2 class="title">{{ post.comments.count }} comments </h2>
           <div class="comments-inner">
             <ul class="comment-list">
               <li class="comment">
+                {% for comment in comment %}
                 <div class="comment-body">
                   <div
                     class="comment-avatar image"
@@ -82,6 +126,8 @@
                       <p>
                         {{ comment.text }}
                       </p>
+                      <p style="word-wrap: break-word;">{% if comment.parent  %}{{ comment.text }}{% endif %}</p>
+
                     </div>
                     <div class="reply">
                       <span class="comment-reply"
@@ -179,15 +225,16 @@
               </li>
             </ul>
           </div> -->
-
+          
           <!-- Respond -->
           <div id="respond" class="comment-respond">
             <h2 class="title">Leave a Reply</h2>
-            <form action="#" method="post" class="comment-form contact">
+            <form method="post" class="comment-form contact">
               {% csrf_token %}
               <div class="contact-item form-name">
+                <input type="text" name="commentid" value="{{ comment.id }}" hidden>
                 <input
-                  name="author"
+                  name="name"
                   value=""
                   type="text"
                   placeholder="Your Name *"
@@ -205,7 +252,7 @@
                 <textarea
                   name="text"
                   placeholder="Your Comment ..."
-                  value="{{ comment }}"
+                  value=""
                 ></textarea>
               </div>
               <div class="contact-item form-submit">
@@ -218,7 +265,7 @@
                 />
               </div>
             </form>
-          </div>
+          </div> 
           {% endfor %}
           <!-- #respond -->
           <!-- End Respond -->

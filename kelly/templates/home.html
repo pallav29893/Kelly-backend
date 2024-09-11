@@ -1,82 +1,39 @@
 {% extends 'base.html' %}
 {% load static %}
+
+
 {% block content %}
-
-			<div class="col-md-9 col-md-offset-3">
-				<div class="projects">
-					<div class="project-item">
-						<a href="{% url 'home-details' %}">
-							<img src="{% static 'images/projects/1.jpg' %}" alt="">
-						</a>
-						<h2 class="title">
-							<a href="#">Emotions</a>
-						</h2>
-					</div>
-
-					<div class="project-item">
-						<a href="{% url 'home-details' %}">
-							<img src="{% static 'images/projects/2.jpg' %}" alt="">
-						</a>
-						<h2 class="title">
-							<a href="#">Mountain</a>
-						</h2>
-					</div>
-
-					<div class="project-item">
-						<a href="{% url 'home-details' %}">
-							<img src="{% static 'images/projects/3.jpg' %}" alt="">
-						</a>
-						<h2 class="title">
-							<a href="#">Interface</a>
-						</h2>
-					</div>
-
-					<div class="project-item">
-						<a href="{% url 'home-details' %}">
-							<img src="{% static 'images/projects/4.jpg' %}" alt="">
-						</a>
-						<h2 class="title">
-							<a href="#">Transportation</a>
-						</h2>
-					</div>
-
-					<div class="project-item">
-						<a href="{% url 'home-details' %}">
-							<img src="{% static 'images/projects/5.jpg' %}" alt="">
-						</a>
-						<h2 class="title">
-							<a href="#">Perspective</a>
-						</h2>
-					</div>
-
-					<div class="project-item">
-						<a href="{% url 'home-details' %}l">
-							<img src="{% static 'images/projects/6.jpg' %}" alt="">
-						</a>
-						<h2 class="title">
-							<a href="#">Mixilicious</a>
-						</h2>
-					</div>
-
-					<div class="project-item">
-						<a href="{% url 'home-details' %}">
-							<img src="{% static 'images/projects/7.jpg' %}" alt="">
-						</a>
-						<h2 class="title">
-							<a href="#">Creative</a>
-						</h2>
-					</div>
-
-					<div class="project-item">
-						<a href="{% url 'home-details' %}">
-							<img src="{% static 'images/projects/8.jpg' %}" alt="">
-						</a>
-						<h2 class="title">
-							<a href="#">Stapler</a>
-						</h2>
-					</div>
+	<div class="col-md-9 col-md-offset-3">
+		<div class="projects">
+        {% for post in posts %}
+			<article class="post">
+				<div class="post-media">
+					<a href="{% url 'blog' %}">
+						<img style="width: 700px;" src="{% if post.feature_image %}{{post.feature_image.url}} {% else %} {% endif %}" alt="Post">
+					</a>
 				</div>
-			</div>
-<!-- End Wrapper Site -->
+				<div class="post-content">
+					<h2 class="title">
+						<a href="{% url 'blog' %}">{{ post.title }}</a>
+					</h2>
 
+					<!-- Post Details -->
+					<div class="post-details">
+						<a href="{% url 'blog' %}" class="post-date">{{ post.published_date }}</a>
+						<!-- <a href="#" class="post-views">15 views</a> -->
+						<a href="{% url 'blog' %}" class="post-comments">{{ post.comments.count }} comments</a>
+					</div>
+					<!-- End Post Details -->
+
+					<!-- The Content -->
+					<div class="the-excerpt">
+						<p>{{ post.description|truncatewords:'50' }}
+						</p>
+					</div>
+					<!-- End The Content -->
+				 </div>
+			</article> 
+			{% endfor %}
+		</div>
+	</div>
 {% endblock %}

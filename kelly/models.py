@@ -35,7 +35,7 @@ class Category(models.Model):
     utimestamp=models.DateTimeField(auto_now=True, editable=False)
     track=models.TextField(blank=True)
     utrack=models.TextField(blank=True)
-    status=models.CharField(max_length=10, choices=STATUS_CHOICES, default='Inactive')
+    status=models.CharField(max_length=10, choices=STATUS_CHOICES, default='Active')
 
     def __str__(self):
         return self.name
@@ -48,7 +48,7 @@ class Tag(models.Model):
     utimestamp=models.DateTimeField(auto_now=True, editable=False)
     track=models.TextField(blank=True)
     utrack=models.TextField(blank=True)
-    status=models.CharField(max_length=10, choices=STATUS_CHOICES, default='Inactive')
+    status=models.CharField(max_length=10, choices=STATUS_CHOICES, default='Active')
 
 
     def __str__(self):
@@ -68,7 +68,7 @@ class Post(models.Model):
     published_date = models.DateTimeField()
     track=models.TextField(blank=True)
     utrack=models.TextField(blank=True)
-    status=models.CharField(max_length=10, choices=STATUS_CHOICES, default='Inactive')
+    status=models.CharField(max_length=10, choices=STATUS_CHOICES, default='Active')
 
     def publish(self):
         self.published_date = timezone.now()
@@ -87,12 +87,26 @@ class Comment(models.Model):
     utimestamp=models.DateTimeField(auto_now=True, editable=False)
     track=models.TextField(blank=True)
     utrack=models.TextField(blank=True)
-    status=models.CharField(max_length=10, choices=STATUS_CHOICES, default='Inactive')
+    status=models.CharField(max_length=10, choices=STATUS_CHOICES, default='Active')
 
     def __str__(self):
         return  self.text
        
+class Contact(models.Model):
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    phone = models.CharField(max_length=15)
+    subject = models.CharField(max_length=255)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    timestamp = models.DateTimeField(auto_now_add=True, editable=False)
+    utimestamp = models.DateTimeField(auto_now=True, editable=False)
+    track = models.TextField()
+    utrack = models.TextField()
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Active')
 
+    def _str_(self):
+        return self.name
         
     
 

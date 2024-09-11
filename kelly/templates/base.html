@@ -2,71 +2,105 @@
 <!DOCTYPE html>
 <html lang="en">
 
-	<head>
-		<meta charset="UTF-8">
-		<title>Kelly - Minimal Portfolio & Blog HTML</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="format-detection" content="telephone=no">
-		<meta name="apple-mobile-web-app-capable" content="yes">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Kelly - Minimal Portfolio & Blog HTML{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
 
-		<link rel='stylesheet' href='//fonts.googleapis.com/css?family=Roboto:400,600,700%7CLato:400,700' type='text/css' media='all' />
+    <meta property="og:title" content="{% block og_title %}Kelly Theme{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}A brief description of your page.{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{% static 'images/default.jpg' %}{% endblock %}">
+    <meta property="og:url" content="{% block og_url %}https://example.com/page-url{% endblock %}">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="{% block og_site_name %}kelly{% endblock %}">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{% block twitter_title %}Your Page Title{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}A brief description of your page.{% endblock %}">
+    <meta name="twitter:image" content="{% block twitter_image %}{% static 'images/default.jpg' %}{% endblock %}">
+    <meta name="twitter:site" content="{% block twitter_site %}@yourtwitterhandle{% endblock %}">
+    <meta name="twitter:creator" content="{% block twitter_creator %}@creatorhandle{% endblock %}">
 
-		<link rel="stylesheet" type="text/css" href="{% static 'css/libs/font-awesome.min.css' %}">
-		<link rel="stylesheet" type="text/css" href="{% static 'css/libs/bootstrap.min.css' %}">
-		<link rel="stylesheet" type="text/css" href="{% static 'css/libs/justifiedGallery.min.css' %}">
-		<link rel="stylesheet" type="text/css" href="{% static 'css/libs/magnific-popup.css' %}">
-		<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
-	</head>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,600,700|Lato:400,700" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/libs/font-awesome.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/libs/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/libs/justifiedGallery.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/libs/magnific-popup.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+
+    {% block schema_data %}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org/",
+        "@type": "WebSite",
+        "name": "Kelly Theme",
+        "description": "A brief description of your page.",
+        "url": "https://example.com/page-url",
+        "image": "{% static 'images/default.jpg' %}",
+        "publisher": {
+            "@type": "Organization",
+            "name": "kelly",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "{% static 'images/logo.jpg' %}"
+            }
+        }
+    }
+    </script>
+    {% endblock %}
+</head>
 
 <body class="home"> 
-	<div id="main-content">
-		<!-- Preload -->
-	<div id="preload">
-		<div class="kd-bounce">
-			<div></div>
-			<div></div>
-		</div>
-	</div>
-	<!-- Preload -->
+    <div id="main-content">
+        <!-- Preload -->
+        <div id="preload">
+            <div class="kd-bounce">
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+        <!-- Preload -->
 
-	<!-- Mobile Menu -->
-	<div class="mobile">
-		<div class="container">
-			<!-- Mobile -->
-			<div class="menu-mobile">
-				<span class="item item-1"></span>
-				<span class="item item-2"></span>
-				<span class="item item-3"></span>
-			</div>
-			<!-- End Mobile -->
+        <!-- Mobile Menu -->
+        <div class="mobile">
+            <div class="container">
+                <!-- Mobile -->
+                <div class="menu-mobile">
+                    <span class="item item-1"></span>
+                    <span class="item item-2"></span>
+                    <span class="item item-3"></span>
+                </div>
+                <!-- End Mobile -->
 
-			<!-- Logo -->
-			<div class="logo">
-				<a href="index.html">Kelly</a>
-			</div>
-			<!-- End Logo -->
-		</div>
-	</div>
-	<div class="hide-menu"></div>
-	<!-- End Mobile Menu -->
+                <!-- Logo -->
+                <div class="logo">
+                    <a href="index.html">Kelly</a>
+                </div>
+                <!-- End Logo -->
+            </div>
+        </div>
+        <div class="hide-menu"></div>
+        <!-- End Mobile Menu -->
 
-	<div class="container">
-		<div class="row">
-			{% include 'header.html' %}
-			{% block content %}											
-			{% endblock %}
-		</div>
-	</div>
-</div>
-<!-- End Wrapper Site -->
+        <div class="container">
+            <div class="row">
+                {% include 'header.html' %}
+                {% block content %}                                            
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+    <!-- End Wrapper Site -->
 
     {% include 'footer.html' %}
-	<!-- Scripts -->
-	<script src="{% static '/js/libs/jquery-1.12.4.min.js' %}"></script>
-	<script src="{% static '/js/libs/jquery.justifiedGallery.min.js' %}"></script>
-	<script src="{% static '/js/libs/jquery.magnific-popup.js' %}"></script>
-	<script src="{% static '/js/libs/scripts.js' %}"></script>
-	<!-- End Scripts -->
+    <!-- Scripts -->
+    <script src="{% static 'js/libs/jquery-1.12.4.min.js' %}"></script>
+    <script src="{% static 'js/libs/jquery.justifiedGallery.min.js' %}"></script>
+    <script src="{% static 'js/libs/jquery.magnific-popup.js' %}"></script>
+    <script src="{% static 'js/libs/scripts.js' %}"></script>
+    <!-- End Scripts -->
 
 </body>
 </html>

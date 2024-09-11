@@ -1,7 +1,64 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block title %}Blog - Kelly Theme{% endblock %}
 
+{% block og_title %}Blog - Kelly Theme{% endblock %}
+{% block og_description %}Explore our latest blog posts and updates.{% endblock %}
+{% block og_image %}{% static 'images/404.jpg' %}{% endblock %}
+{% block og_url %}https://example.com/blog{% endblock %}
+{% block og_site_name %}kelly{% endblock %}
+
+{% block twitter_title %}Blog - Kelly Theme{% endblock %}
+{% block twitter_description %}Explore our latest blog posts and updates.{% endblock %}
+{% block twitter_image %}{% static 'images/404.jpg' %}{% endblock %}
+{% block twitter_site %}@yourtwitterhandle{% endblock %}
+{% block twitter_creator %}@creatorhandle{% endblock %}
+
+{% block schema_data %}
+<!-- Schema.org markup for Blog -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org/",
+    "@type": "Blog",
+    "name": "Kelly Blog",
+    "description": "Explore our latest blog posts and updates.",
+    "url": "https://example.com/blog",
+    "image": "{% static 'images/404.jpg' %}",
+    "publisher": {
+        "@type": "Organization",
+        "name": "kelly",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "{% static 'images/logo.jpg' %}"
+        }
+    },
+    "blogPost": [
+        {% for post in posts %}
+        {
+            "@type": "BlogPosting",
+            "headline": "{{ post.title|escapejs }}",
+            "alternativeHeadline": "{{ post.title|escapejs }}",
+            "description": "{{ post.description|truncatewords:'50'|escapejs }}",
+            "image": "{{ post.feature_image.url }}",
+            "author": {
+                "@type": "Person",
+                "name": "Author Name"
+            },
+            "publisher": {
+                "@type": "Organization",
+                "name": "kelly"
+            },
+            "datePublished": "{{ post.published_date|date:'c' }}",
+            "url": "{% url 'blog_details' slug=post.slug %}"
+        }
+        {% if not forloop.last %},{% endif %}
+        {% endfor %}
+    ]
+}
+</script>
+{% endblock %}
+  
 {% block content %}
 	<div class="col-md-9 col-md-offset-3">
 		<div class="projects">
@@ -10,7 +67,7 @@
 				<div class="post-media">
 					<a href="{% url 'blog_details' slug=post.slug %}">
 						<img style="width: 700px;" src="{% if post.feature_image %}{{post.feature_image.url}} {% else %} {% endif %}" alt="Post">
-					</a>
+					</a> 
 				</div>
 				<div class="post-content">
 					<h2 class="title">
@@ -123,5 +180,4 @@
 			</article>			 -->
 		    </div>
 		</div>
-	</div>
 {% endblock %}

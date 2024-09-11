@@ -29,10 +29,11 @@
           </ul>
           <p>&nbsp;</p>
 
-          <form action="#" method="post" class="comment-form contact">
+          <form method="post" class="comment-form contact">
+            {% csrf_token %}
             <div class="contact-item form-name">
               <input
-                name="author"
+                name="name"
                 value=""
                 type="text"
                 placeholder="Your Name *"
@@ -46,17 +47,26 @@
                 placeholder="Your Email *"
               />
             </div>
+            <div class="contact-item form-phone">
+              <input
+                id="url"
+                name="phone"
+                value=""
+                type="number"
+                placeholder="your phone number"
+              />
+            </div>
             <div class="contact-item form-url">
               <input
                 id="url"
-                name="url"
+                name="subject"
                 value=""
                 type="text"
                 placeholder="Subject"
               />
             </div>
             <div class="contact-item field-full form-message">
-              <textarea name="comment" placeholder="Message *"></textarea>
+              <textarea name="message" placeholder="Message *"></textarea>
             </div>
             <div class="contact-item form-submit">
               <input
