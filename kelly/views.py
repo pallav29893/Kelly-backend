@@ -1,9 +1,18 @@
-from django.shortcuts import render,get_object_or_404 
+from django.shortcuts import render,get_object_or_404
 from .models import Post, Comment,Category,Tag,Contact
 from django.utils import timezone
 from django.urls import reverse
 from django.shortcuts import redirect,HttpResponse
 from django.template.loader import render_to_string
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.crypto import get_random_string
+import string
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from .serializer import *
+from rest_framework import viewsets, views
+
 
 
 def home(request):
@@ -27,15 +36,10 @@ def blog_detail(request,slug):
     post = Post.objects.filter(slug=slug).first()
     if request.method == "POST":
         parent_id = request.POST.get('commentid',None)
-        print(parent_id,'?????????????????????????')
-        # parent = request.POST.get('comment',None)
         comment = Comment.objects.filter(id=parent_id).first()
         name = request.POST.get('name', None)
-        print(name,'/////////////////////')
         email = request.POST.get('email', None)
-        print(email,'/////////////////////')
         text = request.POST.get('text', None)
-        print(text,'/////////////////////')
         if parent_id:
             parent_comment = Comment.objects.filter(id=int(parent_id)).first()
             Comment.objects.create(text=text,post=post,parent=parent_comment,name=name)
@@ -62,54 +66,61 @@ def tag_blog_list(request,slug):
     context = {'posts':posts,'tags':tags}
     return render(request,'tag_blog_list.html',context)
 
-# def contact(request):
-#     if request.method == 'POST':
-#         name = request.POST.get('name',None)
-#         print(name,'<<<<<<<<<<<<<<<<')
-#         email = request.POST.get('email',None)
-#         phone = request.POST.get('phone',None)
-#         subject = request.POST.get('subject',None)
-#         message = request.POST.get('message',None)
-#         context= {
-#             'name':name,
-#             'email':email,
-#             'phone':phone,
-#             'subject':subject,
-#             'message':message,
-#         }
-#     return render(request,'contact_us.html',context)  
-
-
-def contact(request):
-    error_message = None
-    if request.method == 'POST':
-        name = request.POST.get('name',None)
-        # print(name,'<<<<<<<<<<<<<<<<<<')
-        email = request.POST.get('email',None)
-        # print(email,'<<<<<<<<<<<<<<<<<<')
-        phone = request.POST.get('phone',None)
-        # print(phone,'<<<<<<<<<<<<<<<<<<')
-        subject = request.POST.get('subject',None)
-        # print(subject,'<<<<<<<<<<<<<<<<<<')
-        message = request.POST.get('message',None)
-        # print(message,'<<<<<<<<<<<<<<<<<<')
-        if name and email and subject and message:
-            # print(message,'>>>>>>>>>>>>><<<<<<<<>>><><><>')
-            Contact.objects.create(name=name, email=email,phone=phone,subject=subject, message=message)
-            return render(request, 'contact_us.html', {'success': True})
-        else:
-            error_message = "Please fill all the required fields."
-    return render(request, 'contact_us.html', {'error_message':error_message})
-
-
 def robots_txt(request):
     content = render_to_string('robots.txt')
     return HttpResponse(content, content_type='text/plain')
 
+def contactUs(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+        captcha = request.POST.get('captcha')
+
+        if captcha == request.session.get('captcha'):
+            Contact.objects.create(
+                name=name,
+                email=email,
+                phone=phone,
+                subject=subject,
+                message=message
+            )
+            return JsonResponse({'success': True, 'message': 'Message sent successfully!'})
+        else:
+            return JsonResponse({'success': False, 'message': 'Invalid CAPTCHA. Please try again.'})
+
+    return render(request, 'contact_us.html', {'error_message': 'error_message'})
 
 
+def captcha(request):
+        captcha = get_random_string(5, allowed_chars=string.ascii_uppercase + string.digits)
+        request.session['captcha'] = captcha 
+        return JsonResponse({'captcha': captcha})
 
 
+@api_view(['GET'])
+def get_all_category(request):
+    cats = Category.objects.all()
+    serializer = CategorySerializer(cats, many=True)
+    print(serializer.data)
+    # cats_list = []
+    # for cat in cats:
+    #     data = {
+    #         "name": cat.name,
+    #         "slug": cat.slug,
+    #         "status": cat.status
+    #     }
+    #     print(type(data))
+    #     cats_list.append(data)
+
+    # return JsonResponse({'cats': cats_list})
+    return Response(serializer.data)
+
+class CategoryApiView(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer()
 
 
 

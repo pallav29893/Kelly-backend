@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
 {% block content %}
 <div class="col-md-9 col-md-offset-3">
   <div class="projects">
@@ -29,75 +28,80 @@
           </ul>
           <p>&nbsp;</p>
 
-          <form method="post" class="comment-form contact">
+          <div class="alert-messages"></div>
+
+          <form id="contact-form" method="post" class="comment-form contact">
             {% csrf_token %}
             <div class="contact-item form-name">
-              <input
-                name="name"
-                value=""
-                type="text"
-                placeholder="Your Name *"
-              />
+                <input
+                    name="name"
+                    id="name"
+                    value=""
+                    type="text"
+                    placeholder="Your Name *"
+                    required
+                />
             </div>
             <div class="contact-item form-email">
-              <input
-                name="email"
-                value=""
-                type="text"
-                placeholder="Your Email *"
-              />
+                <input
+                    name="email"
+                    id="email"
+                    value=""
+                    type="email"
+                    placeholder="Your Email *"
+                    required
+                />
             </div>
             <div class="contact-item form-phone">
-              <input
-                id="url"
-                name="phone"
-                value=""
-                type="number"
-                placeholder="your phone number"
-              />
+                <input
+                    name="phone"
+                    id="phone"
+                    value=""
+                    type="number"
+                    placeholder="Your Phone Number"
+                />
             </div>
-            <div class="contact-item form-url">
-              <input
-                id="url"
-                name="subject"
-                value=""
-                type="text"
-                placeholder="Subject"
-              />
+            <div class="contact-item form-subject">
+                <input
+                    name="subject"
+                    id="subject"
+                    value=""
+                    type="text"
+                    placeholder="Subject"
+                    required
+                />
             </div>
             <div class="contact-item field-full form-message">
-              <textarea name="message" placeholder="Message *"></textarea>
+                <textarea id="message" name="message" placeholder="Message *" required></textarea>
             </div>
+            <div class="contact-item form-captcha">
+              <span id="captcha-display"></span>
+                <button type="button" id="refresh-captcha" style="width:50px;">
+                    <i class="fa fa-refresh"></i>
+                </button>
+                <input id="captcha-input" name="captcha" type="text" placeholder="Enter CAPTCHA" required>
+            </div>
+
             <div class="contact-item form-submit">
-              <input
-                name="submit"
-                type="submit"
-                id="submit"
-                class="submit"
-                value="POST Comment"
-              />
+                <input
+                    name="submit"
+                    type="submit"
+                    id="submit"
+                    class="submit"
+                    value="Send Message"
+                />
             </div>
-          </form>
+        </form>
           <p>&nbsp;</p>
 
           <div class="post-footer">
             <div class="post-share-wrap">
               <div class="post-share">
-                <a href="#">
-                  <i class="fa fa-facebook"></i>
-                </a>
-                <a href="#">
-                  <i class="fa fa-twitter"></i>
-                </a>
-                <a href="#">
-                  <i class="fa fa-google-plus"></i>
-                </a>
-                <a href="#">
-                  <i class="fa fa-linkedin"></i>
-                </a>
-                <a href="#">
-                  <i class="fa fa-pinterest"></i>
-                </a>
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-google-plus"></i></a>
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+                <a href="#"><i class="fa fa-pinterest"></i></a>
               </div>
             </div>
           </div>
@@ -107,4 +111,60 @@
     </article>
   </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+$(document).ready(function () {
+   function refreshCaptcha() {
+       $.ajax({
+           url: "{% url 'captcha' %}",
+           type: "GET",
+           success: function (response) {
+               $('#captcha-display').text(response.captcha);
+           }
+       });
+   }
+
+   $('#refresh-captcha').on('click', function () {
+       refreshCaptcha();
+   });
+
+   $('#contact-form').on('submit', function (e) {
+       e.preventDefault();
+
+       let formData = {
+           name: $('#name').val(),
+           email: $('#email').val(),
+           phone: $('#phone').val(),
+           subject: $('#subject').val(),
+           message: $('#message').val(),
+           captcha: $('#captcha-input').val(),
+           csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+       };
+
+       $.ajax({
+           url: "{% url 'contact-us' %}",
+           type: "POST",
+           data: formData,
+           success: function (response) {
+               if (response.success) {
+                   $('.alert-messages').html('<div class="alert alert-success">' + response.message + '</div>');
+                   $('#contact-form')[0].reset();
+                   refreshCaptcha();
+               } else {
+                   $('.alert-messages').html('<div class="alert alert-danger">' + response.message + '</div>');
+               }
+           },
+           error: function (response) {
+               $('.alert-messages').html('<div class="alert alert-danger">There was an error sending your message.</div>');
+           }
+       });
+   });
+
+   refreshCaptcha();
+});
+</script>
 {% endblock %}

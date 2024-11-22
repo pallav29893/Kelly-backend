@@ -1,10 +1,11 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Kelly - Minimal Portfolio & Blog HTML{% endblock %}</title>
+    <title>{% block title %}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -23,6 +24,7 @@
     <meta name="twitter:site" content="{% block twitter_site %}@yourtwitterhandle{% endblock %}">
     <meta name="twitter:creator" content="{% block twitter_creator %}@creatorhandle{% endblock %}">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,600,700|Lato:400,700" type="text/css">
     <link rel="stylesheet" type="text/css" href="{% static 'css/libs/font-awesome.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/libs/bootstrap.min.css' %}">
@@ -37,8 +39,8 @@
         "@type": "WebSite",
         "name": "Kelly Theme",
         "description": "A brief description of your page.",
-        "url": "https://example.com/page-url",
-        "image": "{% static 'images/default.jpg' %}",
+        "url": "https://http://127.0.0.1:8000/",
+        "image": "{% static 'post.feature_image' %}",
         "publisher": {
             "@type": "Organization",
             "name": "kelly",
@@ -101,6 +103,7 @@
     <script src="{% static 'js/libs/jquery.magnific-popup.js' %}"></script>
     <script src="{% static 'js/libs/scripts.js' %}"></script>
     <!-- End Scripts -->
+     
 
 </body>
 </html>

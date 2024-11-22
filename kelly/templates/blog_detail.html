@@ -274,4 +274,44 @@
     </article>
   </div>
 </div>
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "{{ post.title }}",
+    "alternativeHeadline": "{{ post.description|slice:':150' }}",
+    "image": "{{ post.feature_image.url }}",
+    "author": {
+      "@type": "Person",
+      "name": "{{ post.author.get_full_name }}"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Your Organization Name",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{% static 'images/your-logo.png' %}"
+      }
+    },
+    "url": "{{ request.build_absolute_uri }}",
+    "mainEntityOfPage": "{{ request.build_absolute_uri }}",
+    "datePublished": "{{ post.published_date|date:'Y-m-d' }}",
+    "dateModified": "{{ post.modified_date|date:'Y-m-d' }}",
+    "description": "{{ post.description|slice:':150' }}",
+    "comment": [
+      {% for comment in post.comments.all %}
+      {
+        "@type": "Comment",
+        "author": {
+          "@type": "Person",
+          "name": "{{ comment.name }}"
+        },
+        "datePublished": "{{ comment.timestamp|date:'Y-m-d' }}",
+        "text": "{{ comment.text|escapejs }}"
+      }
+      {% if not forloop.last %},{% endif %}
+      {% endfor %}
+    ]
+  }
+  </script>
 {% endblock %}
